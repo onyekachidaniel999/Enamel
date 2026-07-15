@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enamel — General & Family Dentistry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,560;0,9..144,650;1,9..144,450;1,9..144,560&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF9F3;
+    --paper-deep:#FCF3E8;
+    --ink:#1C2621;
+    --ink-soft:#4B564F;
+    --coral:#FF6B4A;
+    --coral-deep:#E5563A;
+    --teal:#0B5A4E;
+    --teal-deep:#083F37;
+    --mint:#C9F2DE;
+    --mint-soft:#EAF9F2;
+    --line: rgba(28,38,33,0.12);
+    --shadow: 0 20px 50px -20px rgba(11,58,45,0.25);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-pill: 999px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:560;
+    letter-spacing:-0.01em;
+    color:var(--teal-deep);
+    line-height:1.08;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--coral-deep);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px; height:1px;
+    background:var(--coral-deep);
+    display:inline-block;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  :focus-visible{
+    outline:2.5px solid var(--coral-deep);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---------- PAGE SWITCHING ---------- */
+  .page{display:none;}
+  .page.active{display:block; animation:pagein .5s ease;}
+  @keyframes pagein{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .page-header{
+    padding:150px 0 64px;
+  }
+  .page-header .wrap{max-width:720px;}
+  .page-header h1{font-size:clamp(32px, 4vw, 50px);}
+  .page-header p{color:var(--ink-soft); font-size:16.5px; margin-top:16px;}
+  .back-link{
+    position:fixed;
+    top:96px; left:32px;
+    z-index:90;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--teal-deep);
+    background:#fff;
+    border:1px solid var(--line);
+    padding:10px 18px 10px 14px;
+    border-radius:var(--radius-pill);
+    box-shadow:0 10px 24px -14px rgba(11,58,45,0.3);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .back-link:hover{transform:translateX(-3px); background:var(--mint-soft);}
+  @media (max-width:900px){
+    .back-link{position:static; margin:100px 0 0 20px; display:inline-flex;}
+    .page-header{padding-top:24px;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    padding:18px 24px 0;
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,249,243,0.78);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--line);
+    border-radius:var(--radius-pill);
+    padding:10px 12px 10px 20px;
+    box-shadow:0 8px 24px -16px rgba(11,58,45,0.18);
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Fraunces', serif;
+    font-weight:650;
+    font-size:20px;
+    color:var(--teal-deep);
+    background:none; border:none; padding:0;
+  }
+  .logo .mark{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:linear-gradient(155deg, var(--coral), var(--coral-deep));
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .nav-links{
+    display:flex;
+    gap:30px;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .nav-links button{
+    background:none; border:none; padding:0;
+    font-size:inherit; font-family:inherit; color:inherit;
+    transition:color .2s ease;
+  }
+  .nav-links button:hover{color:var(--teal-deep);}
+  .nav-links button.active{color:var(--coral-deep);}
+  .nav-cta{
+    display:flex; align-items:center; gap:14px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px 24px;
+    border-radius:var(--radius-pill);
+    font-weight:600;
+    font-size:14.5px;
+    border:none;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--coral);
+    color:#fff;
+    box-shadow:0 10px 24px -10px rgba(255,107,74,0.65);
+  }
+  .btn-primary:hover{
+    background:var(--coral-deep);
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px -10px rgba(229,86,58,0.6);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--teal-deep);
+    border:1.5px solid var(--line);
+  }
+  .btn-ghost:hover{
+    border-color:var(--teal-deep);
+    background:var(--mint-soft);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 0 40px;
+    position:relative;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(40px, 5.2vw, 68px);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--coral);
+    font-weight:450;
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:460px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .hero-ctas .btn{padding:16px 30px; font-size:15.5px;}
+  .rating-inline{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .stars{color:var(--coral); letter-spacing:2px; font-size:15px;}
+
+  .hero-stats{
+    display:flex;
+    gap:40px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+  }
+  .hero-stats .stat b{
+    font-family:'Fraunces', serif;
+    font-size:28px;
+    color:var(--teal-deep);
+    display:block;
+    font-weight:600;
+  }
+  .hero-stats .stat span{
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  .hero-art{
+    position:relative;
+    height:520px;
+  }
+  .art-glow{
+    position:absolute;
+    inset:-40px;
+    background:linear-gradient(150deg, var(--mint) 0%, var(--coral) 140%);
+    filter:blur(70px);
+    opacity:0.4;
+    border-radius:40%;
+    animation:glowshift 9s ease-in-out infinite;
+  }
+  @keyframes glowshift{
+    0%,100%{ border-radius:40%; transform:translateY(0px) rotate(0deg);}
+    50%{ border-radius:32% 48% 40% 40%; transform:translateY(-10px) rotate(2deg);}
+  }
+  .slider{
+    position:absolute;
+    inset:0;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .slider::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(190deg, rgba(11,58,45,0) 55%, rgba(8,63,55,0.55) 100%);
+    pointer-events:none;
+  }
+  .slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transform:scale(1.04);
+    transition:opacity 1.3s ease, transform 6s ease;
+  }
+  .slide.active{
+    opacity:1;
+    transform:scale(1);
+  }
+  .slider-dots{
+    position:absolute;
+    bottom:20px; left:50%;
+    transform:translateX(-50%);
+    display:flex; gap:8px;
+    z-index:2;
+  }
+  .dot-btn{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.5);
+    border:1.5px solid rgba(255,255,255,0.7);
+    padding:0;
+    cursor:pointer;
+    transition:background .3s ease, width .3s ease;
+  }
+  .dot-btn.active{
+    background:#fff;
+    width:24px;
+    border-radius:5px;
+  }
+  .float-card{
+    position:absolute;
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:14px 18px;
+    box-shadow:0 16px 32px -14px rgba(11,58,45,0.3);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--teal-deep);
+    animation:cardfloat 6s ease-in-out infinite;
+  }
+  .float-card.two{ bottom:8%; right:-8%; animation-delay:1.2s; z-index:3;}
+  @keyframes cardfloat{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .float-card .dot{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--mint-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--coral-deep);
+    flex-shrink:0;
+  }
+  .float-card small{
+    display:block;
+    font-weight:500;
+    color:var(--ink-soft);
+    font-size:11.5px;
+    margin-top:2px;
+  }
+
+  /* ---------- MARQUEE / TRUST BAR ---------- */
+  .trust-bar{
+    background:var(--teal-deep);
+    color:#fff;
+    padding:20px 0;
+    overflow:hidden;
+    margin-top:24px;
+  }
+  .trust-track{
+    display:flex;
+    gap:64px;
+    width:max-content;
+    animation:scroll-x 26s linear infinite;
+  }
+  @keyframes scroll-x{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .trust-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    color:rgba(255,255,255,0.85);
+    white-space:nowrap;
+  }
+  .trust-item b{color:#fff; font-weight:600;}
+
+  /* ---------- SIGNATURE DIVIDER ---------- */
+  .arc-divider{
+    padding:6px 0 0;
+    line-height:0;
+  }
+  .arc-divider svg{width:100%; height:auto; display:block;}
+  .arc-path{
+    stroke-dasharray:1400;
+    stroke-dashoffset:1400;
+    transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1);
+  }
+  .arc-path.drawn{stroke-dashoffset:0;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section, .content-section{padding:100px 0;}
+  .content-section.tight{padding:70px 0;}
+  .section-head{
+    max-width:620px;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(30px, 3.4vw, 44px);
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    font-size:16.5px;
+    margin-top:14px;
+  }
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  /* ---------- TEASER ROW (home page mini previews) ---------- */
+  .teaser-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:32px;
+  }
+  .teaser-chip{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:22px 20px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .teaser-chip:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .teaser-chip .service-icon{margin-bottom:0; flex-shrink:0;}
+  .teaser-chip span{font-size:14.5px; font-weight:600; color:var(--teal-deep);}
+  .teaser-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--coral-deep);
+    background:none; border:none; padding:0;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
+  }
+  .service-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:34px 28px;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+    border-color:transparent;
+  }
+  .service-card.open{
+    transform:none;
+    box-shadow:var(--shadow);
+    border-color:transparent;
+  }
+  .service-icon{
+    width:52px; height:52px;
+    border-radius:16px;
+    background:var(--mint-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--teal);
+    margin-bottom:22px;
+    transition:background .3s ease, transform .3s ease;
+  }
+  .service-card:hover .service-icon, .service-card.open .service-icon{
+    background:var(--coral);
+    color:#fff;
+    transform:rotate(-6deg) scale(1.06);
+  }
+  .service-card h3{
+    font-size:20px;
+    margin-bottom:10px;
+    font-weight:560;
+  }
+  .service-card p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .service-card .learn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:18px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--coral-deep);
+    background:none;
+    border:none;
+    padding:0;
+    font-family:inherit;
+  }
+  .service-card .learn svg{transition:transform .3s ease;}
+  .service-card.open .learn svg{transform:rotate(180deg);}
+  .service-detail{
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-top .4s ease;
+    border-top:1px solid var(--line);
+    padding-top:0;
+  }
+  .service-card.open .service-detail{
+    max-height:700px;
+    opacity:1;
+    margin-top:20px;
+    padding-top:20px;
+  }
+  .service-detail p{margin-bottom:14px;}
+  .service-detail ul{
+    padding-left:18px;
+    margin-bottom:16px;
+  }
+  .service-detail li{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:7px;
+  }
+  .service-meta{
+    display:flex;
+    gap:20px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--teal-deep);
+    margin-bottom:18px;
+  }
+  .services-cta{
+    margin-top:48px;
+    background:var(--mint-soft);
+    border-radius:var(--radius-lg);
+    padding:36px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .services-cta p{color:var(--ink-soft); font-size:15px;}
+  .services-cta h3{font-size:22px; margin-bottom:6px;}
+
+  /* ---------- PROCESS ---------- */
+  .process-wrap{
+    background:var(--teal-deep);
+    border-radius:40px;
+    padding:70px 60px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .process-wrap::before{
+    content:'';
+    position:absolute;
+    width:420px; height:420px;
+    background:radial-gradient(circle, rgba(255,107,74,0.35), transparent 70%);
+    top:-160px; right:-120px;
+  }
+  .process-wrap .section-head h2{color:#fff;}
+  .process-wrap .section-head p{color:rgba(255,255,255,0.68);}
+  .process-steps{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px;
+    position:relative;
+    z-index:1;
+  }
+  .step{
+    padding-top:26px;
+    border-top:1px solid rgba(255,255,255,0.22);
+  }
+  .step .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--coral);
+    display:block;
+    margin-bottom:14px;
+  }
+  .step h4{
+    color:#fff;
+    font-size:19px;
+    margin-bottom:10px;
+    font-weight:560;
+  }
+  .step p{
+    font-size:14px;
+    color:rgba(255,255,255,0.68);
+  }
+  .expect-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-top:48px;
+  }
+  .expect-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:26px;
+  }
+  .expect-card h4{font-size:17px; margin-bottom:12px;}
+  .expect-card li{font-size:14px; color:var(--ink-soft); margin-bottom:8px; padding-left:18px; position:relative;}
+  .expect-card li::before{content:'✓'; position:absolute; left:0; color:var(--teal); font-weight:700;}
+
+  /* ---------- PHOTO BANNER ---------- */
+  .photo-banner{
+    position:relative;
+    height:380px;
+    border-radius:40px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .photo-banner img{
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .photo-banner::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(8,63,55,0.78) 0%, rgba(8,63,55,0.15) 55%, rgba(8,63,55,0) 100%);
+  }
+  .photo-banner-copy{
+    position:absolute;
+    left:56px; top:50%; transform:translateY(-50%);
+    z-index:2;
+    max-width:400px;
+  }
+  .photo-banner-copy h2{color:#fff; font-size:clamp(26px,3vw,36px);}
+  .photo-banner-copy p{color:rgba(255,255,255,0.78); margin-top:12px; font-size:15px;}
+  @media (max-width:620px){
+    .photo-banner{height:320px;}
+    .photo-banner-copy{left:26px; right:26px; max-width:none;}
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .rating-summary{
+    display:flex;
+    align-items:center;
+    gap:56px;
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:32px 40px;
+    margin-bottom:36px;
+    max-width:760px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .rating-big{
+    text-align:center;
+    flex-shrink:0;
+  }
+  .rating-num{
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    font-weight:650;
+    color:var(--teal-deep);
+    display:block;
+    line-height:1;
+  }
+  .rating-count{
+    display:block;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:6px;
+    white-space:nowrap;
+  }
+  .rating-bars{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .rbar-row{
+    display:grid;
+    grid-template-columns:66px 1fr 34px;
+    align-items:center;
+    gap:10px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .rbar{
+    height:6px;
+    background:var(--line);
+    border-radius:99px;
+    overflow:hidden;
+  }
+  .rbar i{
+    display:block;
+    height:100%;
+    background:var(--coral);
+    border-radius:99px;
+  }
+  @media (max-width:620px){
+    .rating-summary{flex-direction:column; gap:24px; padding:28px 24px;}
+  }
+  .test-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .test-card{
+    background:var(--paper-deep);
+    border-radius:var(--radius-lg);
+    padding:32px 28px;
+    border:1px solid var(--line);
+  }
+  .test-card .stars{margin-bottom:18px;}
+  .test-card p.quote{
+    font-family:'Fraunces', serif;
+    font-size:18px;
+    font-weight:450;
+    font-style:italic;
+    color:var(--teal-deep);
+    margin-bottom:24px;
+    line-height:1.4;
+  }
+  .test-person{
+    display:flex; align-items:center; gap:12px;
+  }
+  .avatar{
+    width:42px; height:42px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif;
+    font-weight:650;
+    font-size:15px;
+    color:#fff;
+    flex-shrink:0;
+  }
+  .test-person b{display:block; font-size:14.5px;}
+  .test-person span{font-size:12.5px; color:var(--ink-soft);}
+
+  /* ---------- TEAM ---------- */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+  }
+  .team-card{
+    text-align:center;
+  }
+  .team-photo{
+    aspect-ratio:1/1.05;
+    border-radius:var(--radius-lg);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-size:38px;
+    font-weight:560;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    transition:transform .4s ease;
+  }
+  .team-card:hover .team-photo{transform:scale(1.03);}
+  .team-photo::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35), transparent 55%);
+  }
+  .team-card h4{font-size:17px; margin-bottom:4px; font-weight:560;}
+  .team-card span{font-size:13px; color:var(--ink-soft);}
+  .team-bio{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:10px;
+    line-height:1.5;
+  }
+  .team-cta{
+    margin-top:48px;
+    text-align:center;
+    padding:36px;
+    background:var(--paper-deep);
+    border-radius:var(--radius-lg);
+  }
+  .team-cta p{color:var(--ink-soft); margin-top:8px;}
+
+  /* ---------- CTA / BOOKING ---------- */
+  .booking{
+    background:linear-gradient(135deg, var(--mint-soft), var(--paper-deep));
+    border-radius:40px;
+    padding:64px;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+  }
+  .booking-info .eyebrow{margin-bottom:18px;}
+  .booking-info h2{font-size:clamp(28px,3vw,38px); margin-bottom:18px;}
+  .booking-info p{color:var(--ink-soft); margin-bottom:30px; max-width:400px;}
+  .info-line{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    margin-bottom:20px;
+    font-size:14.5px;
+  }
+  .info-line .ic{
+    width:36px; height:36px;
+    border-radius:10px;
+    background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--teal);
+    flex-shrink:0;
+  }
+  .info-line b{display:block; margin-bottom:2px;}
+  .info-line span{color:var(--ink-soft);}
+
+  .booking-form{
+    background:#fff;
+    border-radius:var(--radius-lg);
+    padding:36px;
+    box-shadow:var(--shadow);
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:12.5px; font-weight:600; color:var(--teal-deep);}
+  .field input, .field select{
+    padding:13px 14px;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+    font-family:inherit;
+    font-size:14.5px;
+    background:var(--paper);
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus{
+    border-color:var(--coral);
+    outline:none;
+  }
+  .booking-form .btn{width:100%; margin-top:6px; padding:15px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--teal-deep);
+    color:rgba(255,255,255,0.7);
+    padding:64px 0 30px;
+    margin-top:40px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  footer .logo{color:#fff;}
+  .footer-grid p{font-size:14px; margin-top:14px; max-width:260px; line-height:1.6;}
+  .footer-col h5{
+    color:#fff;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    margin-bottom:16px;
+  }
+  .footer-col button, .footer-col a{
+    display:block;
+    font-size:14px;
+    margin-bottom:12px;
+    color:rgba(255,255,255,0.7);
+    transition:color .2s ease;
+    background:none; border:none; padding:0; text-align:left;
+    font-family:inherit;
+  }
+  .footer-col button:hover, .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:26px;
+    font-size:13px;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials a{
+    width:36px; height:36px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero .wrap{grid-template-columns:1fr; gap:52px;}
+    .hero-art{height:380px; order:-1;}
+    .teaser-row{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .process-steps{grid-template-columns:repeat(2,1fr);}
+    .expect-grid{grid-template-columns:1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .booking{grid-template-columns:1fr; padding:40px 28px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width: 620px){
+    .wrap{padding:0 20px;}
+    .services-grid{grid-template-columns:1fr;}
+    .process-steps{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr 1fr;}
+    .process-wrap{padding:44px 26px;}
+    .hero-stats{flex-wrap:wrap; gap:24px;}
+    .form-row{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column; gap:14px; align-items:flex-start;}
+    .services-cta{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <button class="logo" data-page="home">
+      <span class="mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C8 3 5 5.5 5 9.5c0 3 1.4 5 2 8.5.3 1.7 1 3 2.3 3 1.5 0 1.5-2.3 1.9-4.3.2-1.1.5-1.8 1-1.8s.8.7 1 1.8c.4 2 .4 4.3 1.9 4.3 1.3 0 2-1.3 2.3-3 .6-3.5 2-5.5 2-8.5C19 5.5 16 3 12 3z" fill="white"/></svg>
+      </span>
+      Enamel
+    </button>
+    <nav class="nav-links">
+      <button data-page="services" class="toplink">Services</button>
+      <button data-page="process" class="toplink">How it works</button>
+      <button data-page="reviews" class="toplink">Reviews</button>
+      <button data-page="team" class="toplink">Team</button>
+      <button data-page="book" class="toplink">Visit us</button>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+14165550148" class="btn btn-ghost">(416) 555-0148</a>
+      <button data-page="book" class="btn btn-primary">Book a visit</button>
+    </div>
+  </div>
+</header>
+
+<a href="#" class="back-link" data-page="home" style="display:none;" id="backLink">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  Back to home
+</a>
+
+<main id="top">
+
+  <!-- ============ HOME PAGE ============ -->
+  <div class="page active" id="page-home">
+
+    <section class="hero" style="padding-top:64px;">
+      <div class="wrap">
+        <div class="hero-copy">
+          <div class="eyebrow">General &amp; family dentistry</div>
+          <h1>Dental care that<br>actually feels <em>good.</em></h1>
+          <p class="lede">Enamel is a modern dental studio built around gentle care, real conversations, and zero waiting-room dread — for every smile in the family.</p>
+          <div class="hero-ctas">
+            <button data-page="book" class="btn btn-primary">Book your visit</button>
+            <div class="rating-inline">
+              <span class="stars">★★★★★</span>
+              4.9 from 1,200+ patients
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><b>12k+</b><span>Smiles treated</span></div>
+            <div class="stat"><b>15 yrs</b><span>In the neighborhood</span></div>
+            <div class="stat"><b>Same-day</b><span>Emergency slots</span></div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="art-glow"></div>
+          <div class="slider" id="heroSlider">
+            <img class="slide active" src="https://images.unsplash.com/photo-1704455306251-b4634215d98f?q=80&w=1200&auto=format&fit=crop" alt="Bright, modern dental treatment room">
+            <img class="slide" src="https://images.unsplash.com/photo-1643660526741-094639fbe53a?q=80&w=1200&auto=format&fit=crop" alt="Dental chair in a calm, sunlit studio">
+            <img class="slide" src="https://images.unsplash.com/photo-1728342057953-94bfad8f0e7e?q=80&w=1200&auto=format&fit=crop" alt="White dental chair beside a window">
+            <img class="slide" src="https://images.unsplash.com/photo-1643660527098-559f89e45a92?q=80&w=1200&auto=format&fit=crop" alt="Dental operatory with monitor and equipment">
+            <div class="slider-dots" id="sliderDots"></div>
+          </div>
+          <div class="float-card two">
+            <span class="dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C.7 8 2 4 6 4c2.2 0 3.6 1.2 4.5 2.4C11.4 5.2 12.8 4 15 4c4 0 5.3 4 3.5 8-2.5 4.5-9.5 9-9.5 9z" fill="currentColor"/></svg>
+            </span>
+            <div>Painless whitening<small>92% would rebook</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-bar">
+      <div class="trust-track" id="trustTrack"></div>
+    </div>
+
+    <div class="arc-divider">
+      <svg viewBox="0 0 1180 90" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#FF6B4A"/>
+            <stop offset="100%" stop-color="#0B5A4E"/>
+          </linearGradient>
+        </defs>
+        <path id="arcPath" class="arc-path" d="M0 10 C 300 100, 880 100, 1180 10" stroke="url(#arcGrad)" stroke-width="2.5" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- Services teaser -->
+    <section class="content-section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Services</div>
+          <h2>Everything your smile needs, under one roof.</h2>
+          <p>From routine checkups to same-day fixes — no referrals, no runaround.</p>
+        </div>
+        <div class="teaser-row">
+          <div class="teaser-chip reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C.7 8 2 4 6 4c2.2 0 3.6 1.2 4.5 2.4C11.4 5.2 12.8 4 15 4c4 0 5.3 4 3.5 8-2.5 4.5-9.5 9-9.5 9z" fill="currentColor"/></svg></div>
+            <span>General checkups</span>
+          </div>
+          <div class="teaser-chip reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" fill="currentColor"/></svg></div>
+            <span>Cosmetic dentistry</span>
+          </div>
+          <div class="teaser-chip reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="2"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <span>Teeth whitening</span>
+          </div>
+        </div>
+        <button data-page="services" class="teaser-cta">Explore all services <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </section>
+
+    <!-- Photo banner -->
+    <section class="content-section tight" style="padding-top:0;">
+      <div class="wrap">
+        <div class="photo-banner reveal">
+          <img src="https://images.unsplash.com/photo-1657470179447-0f5aa16daa91?q=80&w=1600&auto=format&fit=crop" alt="Dentist carefully treating a patient">
+          <div class="photo-banner-copy">
+            <h2>Care that shows, not just tells.</h2>
+            <p>Every step explained before it happens, so you always know what's coming next.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works teaser -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="process-wrap reveal" style="padding:56px 60px;">
+          <div class="section-head" style="margin-bottom:28px;">
+            <div class="eyebrow" style="color:#FF9C82;">How it works</div>
+            <h2 style="font-size:clamp(24px,2.8vw,34px);">Four steps between you and a visit you don't dread.</h2>
+          </div>
+          <button data-page="process" class="btn btn-primary">See how it works</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews teaser -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <div class="eyebrow">Patient stories</div>
+          <h2>People tend to remember their visit for the right reasons.</h2>
+        </div>
+        <div class="rating-summary reveal">
+          <div class="rating-big">
+            <span class="rating-num">4.9</span>
+            <div class="stars" style="font-size:20px;">★★★★★</div>
+            <span class="rating-count">1,240 Google &amp; Facebook reviews</span>
+          </div>
+          <div class="rating-bars">
+            <div class="rbar-row"><span>5 stars</span><div class="rbar"><i style="width:88%;"></i></div><span>88%</span></div>
+            <div class="rbar-row"><span>4 stars</span><div class="rbar"><i style="width:9%;"></i></div><span>9%</span></div>
+            <div class="rbar-row"><span>3 stars</span><div class="rbar"><i style="width:2%;"></i></div><span>2%</span></div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <button data-page="reviews" class="teaser-cta">Read all reviews <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team teaser -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <div class="eyebrow">Meet the team</div>
+          <h2>Four dentists, one waiting room worth staying in.</h2>
+        </div>
+        <div style="text-align:center;">
+          <button data-page="team" class="teaser-cta">Meet the team <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="services-cta reveal">
+          <div>
+            <h3>Ready to get on the calendar?</h3>
+            <p>Same-day emergency slots available every day.</p>
+          </div>
+          <button data-page="book" class="btn btn-primary">Book a visit</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============ SERVICES PAGE ============ -->
+  <div class="page" id="page-services">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Services</div>
+        <h1>Everything your smile needs, under one roof.</h1>
+        <p>From routine checkups to same-day fixes, our team handles it with the same calm attention — no referrals, no runaround. Tap any service below for the full details.</p>
+      </div>
+    </div>
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="services-grid">
+
+          <div class="service-card" data-service="General checkup">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C.7 8 2 4 6 4c2.2 0 3.6 1.2 4.5 2.4C11.4 5.2 12.8 4 15 4c4 0 5.3 4 3.5 8-2.5 4.5-9.5 9-9.5 9z" fill="currentColor"/></svg></div>
+            <h3>General checkups</h3>
+            <p>Twice-yearly exams and cleanings that catch small issues before they become big ones.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>A checkup here starts with a real conversation, not a rushed once-over. We review your history, take digital X-rays only when they're actually needed, and walk you through anything we find in plain language — before any cleaning begins.</p>
+              <ul>
+                <li>Full oral exam and gum health assessment</li>
+                <li>Digital X-rays (low radiation, as needed only)</li>
+                <li>Professional cleaning &amp; polish</li>
+                <li>Personalized at-home hygiene plan</li>
+              </ul>
+              <div class="service-meta"><span>⏱ 45–60 min</span><span>From $120</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+          <div class="service-card" data-service="Cosmetic dentistry">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" fill="currentColor"/></svg></div>
+            <h3>Cosmetic dentistry</h3>
+            <p>Veneers, bonding, and smile makeovers designed to look like your smile, only better.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>Whether it's one chipped edge or a full smile makeover, we start with a no-pressure consult and a digital preview, so you see the result before we touch anything. Most single-tooth work wraps up in one visit.</p>
+              <ul>
+                <li>Porcelain &amp; composite veneers</li>
+                <li>Chip and gap bonding repair</li>
+                <li>Digital smile design preview</li>
+                <li>Full smile makeover planning</li>
+              </ul>
+              <div class="service-meta"><span>⏱ Varies by case</span><span>From $450</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+          <div class="service-card" data-service="Teeth whitening">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="2"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Teeth whitening</h3>
+            <p>In-studio and take-home whitening that lifts years of stains in a single visit.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>Our in-studio whitening uses a low-sensitivity gel designed to lift years of coffee, tea, and wine stains without the zingy aftermath most people expect. Prefer to do it on your own time? We'll fit you for custom take-home trays instead.</p>
+              <ul>
+                <li>In-studio treatment, shades lighter in one sitting</li>
+                <li>Custom-fitted take-home whitening trays</li>
+                <li>Low-sensitivity formula</li>
+                <li>Touch-up kits for maintenance</li>
+              </ul>
+              <div class="service-meta"><span>⏱ 60–90 min</span><span>From $280</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+          <div class="service-card" data-service="Orthodontics">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12c0-4 3-8 8-8s8 4 8 8-3 8-8 8-8-4-8-8z" stroke="currentColor" stroke-width="2"/><path d="M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Orthodontics</h3>
+            <p>Clear aligners and traditional braces for every age, fitted with digital scanning.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>No messy putty molds — every orthodontic case starts with a digital scan, so your aligners or brackets fit right the first time. We check progress every few weeks and adjust the plan as your smile moves.</p>
+              <ul>
+                <li>Clear aligner therapy for teens &amp; adults</li>
+                <li>Traditional metal &amp; ceramic braces</li>
+                <li>3D digital scanning (no putty molds)</li>
+                <li>Ongoing progress check-ins included</li>
+              </ul>
+              <div class="service-meta"><span>⏱ 12–18 month plans</span><span>From $3,800</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+          <div class="service-card" data-service="Emergency care">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+            <h3>Emergency care</h3>
+            <p>Chipped, cracked, or in pain? We hold same-day slots every single day for it.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>Dental pain doesn't wait for a convenient time, so neither do we. Call ahead if you can, but you're welcome to walk in — we hold same-day slots specifically for chipped teeth, lost fillings, and sudden pain.</p>
+              <ul>
+                <li>Same-day pain relief &amp; diagnosis</li>
+                <li>Chipped or cracked tooth repair</li>
+                <li>Lost filling or crown replacement</li>
+                <li>Root canal referral when needed</li>
+              </ul>
+              <div class="service-meta"><span>⏱ Same-day</span><span>From $150</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+          <div class="service-card" data-service="Pediatric dentistry">
+            <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Pediatric dentistry</h3>
+            <p>A gentler first-visit experience, built to make kids actually look forward to it.</p>
+            <button type="button" class="learn">Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="service-detail">
+              <p>First visits are unhurried on purpose — kids get to sit in the chair, ask questions, and warm up before anything happens. Our goal is a first memory of the dentist that isn't a scary one.</p>
+              <ul>
+                <li>Gentle, no-pressure first visits</li>
+                <li>Fluoride treatments &amp; sealants</li>
+                <li>Age-appropriate oral health education</li>
+                <li>Cavity monitoring for baby teeth</li>
+              </ul>
+              <div class="service-meta"><span>⏱ 30–45 min</span><span>From $95</span></div>
+              <button type="button" class="btn btn-primary book-service-btn">Book this service</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="services-cta reveal">
+          <div>
+            <h3>Not sure which service you need?</h3>
+            <p>Give us a call — we'll point you in the right direction.</p>
+          </div>
+          <a href="tel:+14165550148" class="btn btn-ghost">Call (416) 555-0148</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ PROCESS PAGE ============ -->
+  <div class="page" id="page-process">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">How it works</div>
+        <h1>Four steps between you and a visit you don't dread.</h1>
+        <p>No phone tag, no surprise bills, no sitting around wondering what happens next.</p>
+      </div>
+    </div>
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="process-wrap reveal">
+          <div class="process-steps">
+            <div class="step">
+              <span class="num">01</span>
+              <h4>Book online</h4>
+              <p>Pick a time in under a minute — no phone tag, no hold music. Same-day emergency slots are held separately every day.</p>
+            </div>
+            <div class="step">
+              <span class="num">02</span>
+              <h4>Quick intake</h4>
+              <p>Fill out your history and insurance details beforehand from your phone, so your visit starts on time instead of in a waiting room clipboard.</p>
+            </div>
+            <div class="step">
+              <span class="num">03</span>
+              <h4>See a dentist</h4>
+              <p>A real conversation about what you need, and why — before anything begins. Digital X-rays only when they add something useful.</p>
+            </div>
+            <div class="step">
+              <span class="num">04</span>
+              <h4>Leave smiling</h4>
+              <p>Clear next steps, transparent pricing, and a plan you actually understand — plus a follow-up if you ever have questions after.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="expect-grid">
+          <div class="expect-card reveal">
+            <h4>What to bring to your first visit</h4>
+            <ul>
+              <li>Photo ID and insurance card, if you have coverage</li>
+              <li>A list of current medications</li>
+              <li>Any recent X-rays from a previous dentist</li>
+              <li>Arrive 10 minutes early for a smoother start</li>
+            </ul>
+          </div>
+          <div class="expect-card reveal">
+            <h4>What happens after your visit</h4>
+            <ul>
+              <li>A written summary of what was found and discussed</li>
+              <li>A follow-up reminder if a next appointment is needed</li>
+              <li>Direct line to ask questions before your next visit</li>
+              <li>Transparent, itemized invoice — no surprise line items</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="services-cta reveal">
+          <div>
+            <h3>Ready to get started?</h3>
+            <p>Booking takes under a minute.</p>
+          </div>
+          <button data-page="book" class="btn btn-primary">Book a visit</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ REVIEWS PAGE ============ -->
+  <div class="page" id="page-reviews">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Patient stories</div>
+        <h1>People tend to remember their visit for the right reasons.</h1>
+        <p>Real feedback from patients across every service we offer.</p>
+      </div>
+    </div>
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="rating-summary reveal">
+          <div class="rating-big">
+            <span class="rating-num">4.9</span>
+            <div class="stars" style="font-size:20px;">★★★★★</div>
+            <span class="rating-count">1,240 Google &amp; Facebook reviews</span>
+          </div>
+          <div class="rating-bars">
+            <div class="rbar-row"><span>5 stars</span><div class="rbar"><i style="width:88%;"></i></div><span>88%</span></div>
+            <div class="rbar-row"><span>4 stars</span><div class="rbar"><i style="width:9%;"></i></div><span>9%</span></div>
+            <div class="rbar-row"><span>3 stars</span><div class="rbar"><i style="width:2%;"></i></div><span>2%</span></div>
+            <div class="rbar-row"><span>1–2 stars</span><div class="rbar"><i style="width:1%;"></i></div><span>1%</span></div>
+          </div>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"First dentist visit in years I didn't dread. They explained everything before touching anything."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#FF6B4A,#E5563A);">A</div>
+              <div><b>Amanda O.</b><span>General checkup · 2022</span></div>
+            </div>
+          </div>
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"My kids ask when they get to go back. That alone tells you everything about this place."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#0B5A4E,#0E7A6A);">D</div>
+              <div><b>Daniel K.</b><span>Pediatric dentistry · 2021</span></div>
+            </div>
+          </div>
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"Chipped a tooth on a Sunday, got seen Monday morning. Fixed and out within the hour."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#0E7A6A,#C9F2DE); color:#0B5A4E;">R</div>
+              <div><b>Rachel F.</b><span>Emergency care · 2024</span></div>
+            </div>
+          </div>
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"Did the take-home whitening trays before my wedding. Zero sensitivity and a very noticeable difference."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#FF6B4A,#0B5A4E);">J</div>
+              <div><b>Jordan P.</b><span>Teeth whitening · 2023</span></div>
+            </div>
+          </div>
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"18 months into clear aligners and the check-ins have genuinely been quick every single time."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#083F37,#0E7A6A);">N</div>
+              <div><b>Nina K.</b><span>Orthodontics · 2023</span></div>
+            </div>
+          </div>
+          <div class="test-card reveal">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"Got a full smile makeover consult here. They showed me a preview before committing to anything, which sold me."</p>
+            <div class="test-person">
+              <div class="avatar" style="background:linear-gradient(135deg,#E5563A,#FF6B4A);">T</div>
+              <div><b>Tyler B.</b><span>Cosmetic dentistry · 2024</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ TEAM PAGE ============ -->
+  <div class="page" id="page-team">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Meet the team</div>
+        <h1>Four dentists, one waiting room worth staying in.</h1>
+        <p>Every dentist here trained for the technical side — but we hired for bedside manner too.</p>
+      </div>
+    </div>
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-photo" style="background:linear-gradient(150deg,#0B5A4E,#0E7A6A);">S</div>
+            <h4>Dr. Sarah Mitchell</h4>
+            <span>Founder &amp; General Dentist</span>
+            <p class="team-bio">15 years in general practice, with a focus on preventive care and calm first visits.</p>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-photo" style="background:linear-gradient(150deg,#FF6B4A,#E5563A);">M</div>
+            <h4>Dr. Michael Tran</h4>
+            <span>Cosmetic Dentistry</span>
+            <p class="team-bio">Specializes in veneers and smile makeovers, with digital previews before any work begins.</p>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-photo" style="background:linear-gradient(150deg,#0E7A6A,#C9F2DE);">L</div>
+            <h4>Dr. Laura Chen</h4>
+            <span>Orthodontics</span>
+            <p class="team-bio">Leads our clear aligner and braces programs for teens and adults alike.</p>
+          </div>
+          <div class="team-card reveal">
+            <div class="team-photo" style="background:linear-gradient(150deg,#083F37,#0B5A4E);">E</div>
+            <h4>Dr. Emma Fournier</h4>
+            <span>Pediatric Dentistry</span>
+            <p class="team-bio">Makes first visits genuinely fun — most of her patients ask to come back sooner.</p>
+          </div>
+        </div>
+
+        <div class="team-cta reveal">
+          <h3>We're growing</h3>
+          <p>Interested in joining Enamel? Reach out at hello@enamel.dental.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ BOOK PAGE ============ -->
+  <div class="page" id="page-book">
+    <div class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Visit us</div>
+        <h1>Let's get you on the calendar.</h1>
+        <p>Same-day emergency slots available every day. Most visits are confirmed within two hours.</p>
+      </div>
+    </div>
+    <section style="padding-top:0;">
+      <div class="wrap">
+        <div class="booking reveal">
+          <div class="booking-info">
+            <div class="info-line">
+              <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg></span>
+              <div><b>Studio address</b><span>142 Ridgeview Lane, Suite 3, Toronto, ON M4K 1M9</span></div>
+            </div>
+            <div class="info-line">
+              <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg></span>
+              <div><b>Hours</b><span>Mon–Sat, 8:00am – 6:00pm</span></div>
+            </div>
+            <div class="info-line">
+              <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" stroke="currentColor" stroke-width="2"/></svg></span>
+              <div><b>Phone</b><span>(416) 555-0148</span></div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?q=80&w=800&auto=format&fit=crop" alt="Sterile dental instrument tray" style="border-radius:var(--radius-md); margin-top:8px; width:100%; max-width:340px; box-shadow:var(--shadow);">
+          </div>
+
+          <form class="booking-form" onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Request sent ✓';">
+            <div class="form-row">
+              <div class="field">
+                <label for="fname">First name</label>
+                <input id="fname" type="text" placeholder="Jane" required>
+              </div>
+              <div class="field">
+                <label for="lname">Last name</label>
+                <input id="lname" type="text" placeholder="Doe" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field full">
+                <label for="phone">Phone number</label>
+                <input id="phone" type="tel" placeholder="(555) 000-0000" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="service">Service</label>
+                <select id="service">
+                  <option>General checkup</option>
+                  <option>Cosmetic dentistry</option>
+                  <option>Teeth whitening</option>
+                  <option>Orthodontics</option>
+                  <option>Emergency care</option>
+                  <option>Pediatric dentistry</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="date">Preferred date</label>
+                <input id="date" type="date">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Request appointment</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <button class="logo" data-page="home">
+          <span class="mark">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3C8 3 5 5.5 5 9.5c0 3 1.4 5 2 8.5.3 1.7 1 3 2.3 3 1.5 0 1.5-2.3 1.9-4.3.2-1.1.5-1.8 1-1.8s.8.7 1 1.8c.4 2 .4 4.3 1.9 4.3 1.3 0 2-1.3 2.3-3 .6-3.5 2-5.5 2-8.5C19 5.5 16 3 12 3z" fill="white"/></svg>
+          </span>
+          Enamel
+        </button>
+        <p>A modern general dental studio built around gentle care and real conversations. Every smile, one roof.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <button data-page="services">Services</button>
+        <button data-page="process">How it works</button>
+        <button data-page="reviews">Reviews</button>
+        <button data-page="team">Team</button>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <button data-page="services">General checkups</button>
+        <button data-page="services">Cosmetic dentistry</button>
+        <button data-page="services">Orthodontics</button>
+        <button data-page="services">Emergency care</button>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="tel:+14165550148">(416) 555-0148</a>
+        <a href="mailto:hello@enamel.dental">hello@enamel.dental</a>
+        <button data-page="book">Book a visit</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Enamel Dental Studio. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.6"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6h3v-6H16l.5-3h-3V9.7c0-.5.3-.7.5-.7z" fill="white"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Page switching ----------
+  function showPage(name){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + name);
+    if (!target) return;
+    target.classList.add('active');
+
+    document.querySelectorAll('.toplink').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-page') === name);
+    });
+
+    const backLink = document.getElementById('backLink');
+    backLink.style.display = (name === 'home') ? 'none' : 'inline-flex';
+
+    window.scrollTo({top:0, behavior:'auto'});
+
+    // Reveal content immediately within the freshly shown page
+    target.querySelectorAll('.reveal, .service-card').forEach(el => el.classList.add('in'));
+  }
+
+  document.querySelectorAll('[data-page]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      showPage(el.getAttribute('data-page'));
+    });
+  });
+
+  // Hero image slider
+  (function(){
+    const slides = document.querySelectorAll('#heroSlider .slide');
+    const dotsWrap = document.getElementById('sliderDots');
+    let i = 0;
+    slides.forEach((_, idx) => {
+      const b = document.createElement('button');
+      b.className = 'dot-btn' + (idx === 0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Show slide ' + (idx + 1));
+      b.addEventListener('click', (e) => { e.stopPropagation(); show(idx); });
+      dotsWrap.appendChild(b);
+    });
+    const dots = dotsWrap.querySelectorAll('.dot-btn');
+    function show(idx){
+      slides[i].classList.remove('active');
+      dots[i].classList.remove('active');
+      i = idx;
+      slides[i].classList.add('active');
+      dots[i].classList.add('active');
+    }
+    setInterval(() => show((i + 1) % slides.length), 4500);
+  })();
+
+  // Trust bar content, duplicated for seamless marquee
+  const trustItems = [
+    '<b>4.9 / 5</b> average rating',
+    '<b>12,000+</b> smiles treated',
+    '<b>15 years</b> serving the neighborhood',
+    '<b>Same-day</b> emergency slots',
+    '<b>6</b> insurance partners accepted'
+  ];
+  const track = document.getElementById('trustTrack');
+  const trustHtml = trustItems.map(t => '<div class="trust-item">' + t + '</div>').join('');
+  track.innerHTML = trustHtml + trustHtml;
+
+  // Scroll reveal (for elements that come into view via scrolling within a page)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal, .service-card').forEach(el => io.observe(el));
+
+  // Signature arc draw-in
+  const arcPath = document.getElementById('arcPath');
+  const arcIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        arcPath.classList.add('drawn');
+        arcIO.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.4});
+  arcIO.observe(arcPath);
+
+  // Service accordion — click a card to expand its full detail in place
+  (function(){
+    const cards = document.querySelectorAll('.service-card');
+    cards.forEach(card => {
+      const toggleBtn = card.querySelector('.learn');
+      const open = () => {
+        const willOpen = !card.classList.contains('open');
+        cards.forEach(c => c.classList.remove('open'));
+        cards.forEach(c => {
+          const b = c.querySelector('.learn');
+          b.innerHTML = 'Read more <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        });
+        if (willOpen){
+          card.classList.add('open');
+          toggleBtn.innerHTML = 'Show less <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          setTimeout(() => card.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+        }
+      };
+      toggleBtn.addEventListener('click', (e) => { e.stopPropagation(); open(); });
+
+      const bookBtn = card.querySelector('.book-service-btn');
+      if (bookBtn){
+        bookBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const serviceName = card.getAttribute('data-service');
+          const select = document.getElementById('service');
+          if (select){
+            [...select.options].forEach(opt => {
+              if (opt.textContent.trim() === serviceName) select.value = opt.value;
+            });
+          }
+          showPage('book');
+        });
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
