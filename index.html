@@ -79,12 +79,14 @@
   }
 
   /* ---------- PAGE SWITCHING ---------- */
-  .page{display:none;}
-  .page.active{display:block; animation:pagein .5s ease;}
-  @keyframes pagein{
-    from{opacity:0; transform:translateY(10px);}
-    to{opacity:1; transform:translateY(0);}
+  .page{
+    display:none;
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1);
   }
+  .page.active{display:block;}
+  .page.active.in{opacity:1; transform:translateY(0);}
   .page-header{
     padding:150px 0 64px;
   }
@@ -652,6 +654,73 @@
     .photo-banner-copy{left:26px; right:26px; max-width:none;}
   }
 
+  /* ---------- STORY (homepage write-up) ---------- */
+  .story-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:64px;
+    align-items:start;
+  }
+  .story-copy p{
+    color:var(--ink-soft);
+    font-size:16.5px;
+    line-height:1.75;
+    margin-top:18px;
+    max-width:520px;
+  }
+  .story-copy p:first-of-type::first-letter{
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    font-weight:560;
+    color:var(--teal);
+    float:left;
+    line-height:0.8;
+    padding-right:8px;
+    padding-top:6px;
+  }
+  .story-quote{
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:36px 34px;
+    position:relative;
+  }
+  .story-quote .mark{
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    color:var(--coral);
+    line-height:1;
+    display:block;
+    margin-bottom:6px;
+  }
+  .story-quote p{
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    font-style:italic;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .story-quote .story-attr{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:22px;
+  }
+  .story-quote .story-attr .avatar{
+    width:38px; height:38px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:560; font-size:15px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--teal),var(--teal-deep));
+    flex-shrink:0;
+  }
+  .story-attr b{font-size:14px;}
+  .story-attr span{font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace;}
+  @media (max-width:860px){
+    .story-grid{grid-template-columns:1fr; gap:32px;}
+  }
+
   /* ---------- TESTIMONIALS ---------- */
   .rating-summary{
     display:flex;
@@ -776,6 +845,13 @@
     transition:transform .4s ease;
   }
   .team-card:hover .team-photo{transform:scale(1.03);}
+  .team-photo img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
   .team-photo::after{
     content:'';
     position:absolute;
@@ -913,72 +989,6 @@
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);}
   .reveal.in{opacity:1; transform:translateY(0);}
 
-  /* ---------- SUBPAGE ADDITIONS ---------- */
-  .bg-paper-deep { background: var(--paper-deep); }
-  .split-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    border-radius: 40px;
-  }
-  .comfort-list li {
-    margin-bottom: 14px;
-    padding-left: 28px;
-    position: relative;
-    font-size: 15px;
-    color: var(--ink-soft);
-  }
-  .comfort-list li::before {
-    content: '✦';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    font-size: 14px;
-    color: var(--coral);
-  }
-  
-  .faq-wrap { margin-top: 40px; border-top: 1px solid var(--line); }
-  .faq-item { padding: 24px 0; border-bottom: 1px solid var(--line); }
-  .faq-item h4 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 17.5px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--teal-deep);
-  }
-  .faq-item p { color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 40px;
-  }
-  .gallery-grid img {
-    width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow);
-  }
-
-  /* ---------- NEW ANIMATIONS ---------- */
-  .reveal-left {
-    opacity: 0;
-    transform: translateX(-35px);
-    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
-  }
-  .reveal-right {
-    opacity: 0;
-    transform: translateX(35px);
-    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
-  }
-  .reveal-left.in, .reveal-right.in {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 980px){
     .hero .wrap{grid-template-columns:1fr; gap:52px;}
@@ -992,8 +1002,6 @@
     .booking{grid-template-columns:1fr; padding:40px 28px;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
-    .split-grid { grid-template-columns: 1fr; gap: 40px; }
-    .gallery-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 620px){
     .wrap{padding:0 20px;}
@@ -1045,7 +1053,7 @@
 <main id="top">
 
   <!-- ============ HOME PAGE ============ -->
-  <div class="page active" id="page-home">
+  <div class="page active in" id="page-home">
 
     <section class="hero" style="padding-top:64px;">
       <div class="wrap">
@@ -1136,6 +1144,28 @@
           <div class="photo-banner-copy">
             <h2>Care that shows, not just tells.</h2>
             <p>Every step explained before it happens, so you always know what's coming next.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our story -->
+    <section class="content-section">
+      <div class="wrap">
+        <div class="story-grid">
+          <div class="story-copy reveal">
+            <div class="eyebrow">Why we exist</div>
+            <h2 style="margin-top:10px;">We started Enamel because dentistry didn't have to feel like this.</h2>
+            <p>Most dental visits are built around the clinic's schedule, not the patient's nerves. We flipped that. Every room here was designed to slow your pulse down a little — natural light, quiet corners, and a team that explains what's happening before it happens, not after.</p>
+            <p>Fifteen years in, we've learned that trust is built in the small moments: a straight answer about cost, a same-day slot when something hurts, a hygienist who remembers your name. That's the whole model. No upselling, no jargon, no waiting room dread — just care that respects your time and your teeth in equal measure.</p>
+          </div>
+          <div class="story-quote reveal">
+            <span class="mark">&ldquo;</span>
+            <p>We measure a good visit by how calm you feel walking out — not just by what we fixed.</p>
+            <div class="story-attr">
+              <div class="avatar">S</div>
+              <div><b>Dr. Sarah Mitchell</b><span>Founder &amp; General Dentist</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1330,25 +1360,6 @@
 
         </div>
 
-        <!-- Studio Comforts Split Section -->
-        <div class="content-section bg-paper-deep" style="margin-top:80px; padding:80px 60px; border-radius:40px;">
-          <div class="split-grid">
-            <div class="reveal-left">
-              <div class="eyebrow">Studio Comforts</div>
-              <h2 style="font-size:clamp(28px, 3.5vw, 40px);">Tech that makes it better, not just faster.</h2>
-              <p style="color:var(--ink-soft); margin:18px 0 28px; font-size:16px;">We've replaced the things people hate about the dentist with things they actually look forward to.</p>
-              <ul class="comfort-list">
-                <li><b style="color:var(--teal-deep);">Noise-canceling headphones:</b> Stream your favorite shows or podcasts while we work.</li>
-                <li><b style="color:var(--teal-deep);">3D Digital Scanning:</b> Precise digital impressions—no more gag-inducing putty molds.</li>
-                <li><b style="color:var(--teal-deep);">Warm scented towels:</b> A refreshing, spa-like finish after every treatment.</li>
-              </ul>
-            </div>
-            <div class="reveal-right" style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow); height:100%;">
-              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop" alt="Modern dental technology" style="width:100%; height:100%; object-fit:cover; min-height:400px;">
-            </div>
-          </div>
-        </div>
-
         <div class="services-cta reveal">
           <div>
             <h3>Not sure which service you need?</h3>
@@ -1414,28 +1425,6 @@
               <li>Direct line to ask questions before your next visit</li>
               <li>Transparent, itemized invoice — no surprise line items</li>
             </ul>
-          </div>
-        </div>
-
-        <!-- FAQ Section -->
-        <div class="content-section tight reveal" style="max-width:800px; margin:40px auto 0;">
-          <div class="section-head center">
-            <div class="eyebrow">Common Questions</div>
-            <h2>Everything else you need to know.</h2>
-          </div>
-          <div class="faq-wrap">
-            <div class="faq-item reveal">
-              <h4>Do you accept my insurance?</h4>
-              <p>We work with most major PPO plans and will submit claims on your behalf to maximize your benefits. If you're out of network or uninsured, we provide clear, itemized estimates before any treatment begins so there are never any surprise bills.</p>
-            </div>
-            <div class="faq-item reveal" style="transition-delay:0.1s;">
-              <h4>What if I have severe dental anxiety?</h4>
-              <p>You're exactly who we built this studio for. We offer nitrous oxide (laughing gas) for light relaxation, and can prescribe oral sedatives for longer procedures if requested. Just let us know when booking, and we'll factor extra time into your visit.</p>
-            </div>
-            <div class="faq-item reveal" style="transition-delay:0.2s;">
-              <h4>How long will my first visit take?</h4>
-              <p>Plan for about 60 minutes. We don't rush the intake conversation or the exam, ensuring we have plenty of time to review your X-rays and discuss your goals without anyone looking at the clock.</p>
-            </div>
           </div>
         </div>
 
@@ -1525,21 +1514,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Gallery Section -->
-        <div class="content-section" style="padding-bottom:0;">
-          <div class="section-head center reveal">
-            <div class="eyebrow">Inside the studio</div>
-            <h2>A space designed for calm.</h2>
-            <p>Take a look around before you ever step foot inside.</p>
-          </div>
-          <div class="gallery-grid">
-            <img class="reveal" style="transition-delay: 0s;" src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Calm waiting room lobby">
-            <img class="reveal" style="transition-delay: 0.15s;" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" alt="Bright, clean hallway">
-            <img class="reveal" style="transition-delay: 0.3s;" src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?q=80&w=800&auto=format&fit=crop" alt="Minimalist treatment room">
-          </div>
-        </div>
-
       </div>
     </section>
   </div>
@@ -1557,43 +1531,28 @@
       <div class="wrap">
         <div class="team-grid">
           <div class="team-card reveal">
-            <div class="team-photo" style="background:linear-gradient(150deg,#0B5A4E,#0E7A6A);">S</div>
+            <div class="team-photo" style="background:linear-gradient(150deg,#0B5A4E,#0E7A6A);"><img src="https://images.unsplash.com/photo-1627161683077-e34782c24d81?q=80&w=800&auto=format&fit=crop" alt="Dr. Sarah Mitchell"></div>
             <h4>Dr. Sarah Mitchell</h4>
             <span>Founder &amp; General Dentist</span>
             <p class="team-bio">15 years in general practice, with a focus on preventive care and calm first visits.</p>
           </div>
           <div class="team-card reveal">
-            <div class="team-photo" style="background:linear-gradient(150deg,#FF6B4A,#E5563A);">M</div>
+            <div class="team-photo" style="background:linear-gradient(150deg,#FF6B4A,#E5563A);"><img src="https://images.unsplash.com/photo-1650091903029-fc3f1ddcb7f9?q=80&w=800&auto=format&fit=crop" alt="Dr. Michael Tran"></div>
             <h4>Dr. Michael Tran</h4>
             <span>Cosmetic Dentistry</span>
             <p class="team-bio">Specializes in veneers and smile makeovers, with digital previews before any work begins.</p>
           </div>
           <div class="team-card reveal">
-            <div class="team-photo" style="background:linear-gradient(150deg,#0E7A6A,#C9F2DE);">L</div>
+            <div class="team-photo" style="background:linear-gradient(150deg,#0E7A6A,#C9F2DE);"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop" alt="Dr. Laura Chen"></div>
             <h4>Dr. Laura Chen</h4>
             <span>Orthodontics</span>
             <p class="team-bio">Leads our clear aligner and braces programs for teens and adults alike.</p>
           </div>
           <div class="team-card reveal">
-            <div class="team-photo" style="background:linear-gradient(150deg,#083F37,#0B5A4E);">E</div>
+            <div class="team-photo" style="background:linear-gradient(150deg,#083F37,#0B5A4E);"><img src="https://images.unsplash.com/photo-1573497161161-c3e73707e25c?q=80&w=800&auto=format&fit=crop" alt="Dr. Emma Fournier"></div>
             <h4>Dr. Emma Fournier</h4>
             <span>Pediatric Dentistry</span>
             <p class="team-bio">Makes first visits genuinely fun — most of her patients ask to come back sooner.</p>
-          </div>
-        </div>
-
-        <!-- Philosophy Section -->
-        <div class="content-section" style="margin-top:40px;">
-          <div class="split-grid" style="align-items:stretch;">
-            <div class="reveal-left" style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow);">
-              <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop" alt="Dentist consulting with a patient" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <div class="reveal-right bg-paper-deep" style="padding:60px 48px; border-radius:var(--radius-lg); display:flex; flex-direction:column; justify-content:center;">
-              <div class="eyebrow">Our Philosophy</div>
-              <h2 style="margin-bottom:20px;">Healthcare, but with actual care.</h2>
-              <p style="color:var(--ink-soft); font-size:15px; margin-bottom:16px;">We founded Enamel because we were tired of the clinical, rushed, and intimidating atmosphere that defines most dental offices.</p>
-              <p style="color:var(--ink-soft); font-size:15px;">Every provider on our team is trained to listen first and treat second. We believe that communicating clearly and keeping you comfortable is just as important as the clinical excellence of our work.</p>
-            </div>
           </div>
         </div>
 
@@ -1627,7 +1586,7 @@
               <div><b>Hours</b><span>Mon–Sat, 8:00am – 6:00pm</span></div>
             </div>
             <div class="info-line">
-              <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" stroke="currentColor" stroke-width="2"/></svg></span>
+              <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z" stroke="currentColor" stroke-width="2"/></svg></span>
               <div><b>Phone</b><span>(416) 555-0148</span></div>
             </div>
             <img src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?q=80&w=800&auto=format&fit=crop" alt="Sterile dental instrument tray" style="border-radius:var(--radius-md); margin-top:8px; width:100%; max-width:340px; box-shadow:var(--shadow);">
@@ -1720,24 +1679,39 @@
 </footer>
 
 <script>
-  // ---------- Page switching ----------
+  // ---------- Page switching (with fade out / fade in) ----------
   function showPage(name){
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + name);
     if (!target) return;
-    target.classList.add('active');
+    const current = document.querySelector('.page.active');
+    if (current === target) return;
 
-    document.querySelectorAll('.toplink').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-page') === name);
-    });
+    function activateTarget(){
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active', 'in'));
+      target.classList.add('active');
 
-    const backLink = document.getElementById('backLink');
-    backLink.style.display = (name === 'home') ? 'none' : 'inline-flex';
+      document.querySelectorAll('.toplink').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-page') === name);
+      });
 
-    window.scrollTo({top:0, behavior:'auto'});
+      const backLink = document.getElementById('backLink');
+      backLink.style.display = (name === 'home') ? 'none' : 'inline-flex';
 
-    // Reveal content immediately within the freshly shown page
-    target.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-card').forEach(el => el.classList.add('in'));
+      window.scrollTo({top:0, behavior:'auto'});
+
+      // Reveal content immediately within the freshly shown page
+      target.querySelectorAll('.reveal, .service-card').forEach(el => el.classList.add('in'));
+
+      // Trigger the fade-in on the next frame so the transition actually runs
+      requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('in')));
+    }
+
+    if (current){
+      current.classList.remove('in');
+      setTimeout(activateTarget, 320);
+    } else {
+      activateTarget();
+    }
   }
 
   document.querySelectorAll('[data-page]').forEach(el => {
@@ -1791,7 +1765,7 @@
       }
     });
   }, {threshold:0.15});
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-card').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal, .service-card').forEach(el => io.observe(el));
 
   // Signature arc draw-in
   const arcPath = document.getElementById('arcPath');
