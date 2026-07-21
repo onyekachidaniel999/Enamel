@@ -721,6 +721,46 @@
     .story-grid{grid-template-columns:1fr; gap:32px;}
   }
 
+  /* ---------- PHOTO DUO (page-header supporting images) ---------- */
+  .photo-duo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:56px;
+  }
+  .photo-duo figure{
+    position:relative;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    height:260px;
+    box-shadow:var(--shadow);
+  }
+  .photo-duo img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .5s ease;
+  }
+  .photo-duo figure:hover img{transform:scale(1.04);}
+  .photo-duo figure::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(8,63,55,0.55) 0%, rgba(8,63,55,0) 45%);
+  }
+  .photo-duo figcaption{
+    position:absolute;
+    left:18px; bottom:16px;
+    z-index:2;
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+  }
+  @media (max-width:700px){
+    .photo-duo{grid-template-columns:1fr; }
+    .photo-duo figure{height:220px;}
+  }
+
   /* ---------- TESTIMONIALS ---------- */
   .rating-summary{
     display:flex;
@@ -1248,6 +1288,16 @@
     </div>
     <section style="padding-top:0;">
       <div class="wrap">
+        <div class="photo-duo reveal">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1758205308179-4e00e0e4060b?q=80&w=1200&auto=format&fit=crop" alt="Dentist examining a patient's teeth with dental tools">
+            <figcaption>Precise, gentle exams</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1766338390573-ec092d69cdcb?q=80&w=1200&auto=format&fit=crop" alt="Dentist cleaning a patient's teeth">
+            <figcaption>Professional cleanings</figcaption>
+          </figure>
+        </div>
         <div class="services-grid">
 
           <div class="service-card" data-service="General checkup">
@@ -1382,6 +1432,16 @@
     </div>
     <section style="padding-top:0;">
       <div class="wrap">
+        <div class="photo-duo reveal">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?q=80&w=1200&auto=format&fit=crop" alt="Dentist talking through treatment with a patient">
+            <figcaption>A real conversation first</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1758205308106-5760d0227cc7?q=80&w=1200&auto=format&fit=crop" alt="Dental team providing treatment to a patient">
+            <figcaption>Calm, unhurried care</figcaption>
+          </figure>
+        </div>
         <div class="process-wrap reveal">
           <div class="process-steps">
             <div class="step">
@@ -1450,6 +1510,16 @@
     </div>
     <section style="padding-top:0;">
       <div class="wrap">
+        <div class="photo-duo reveal">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1758206524132-72a2aa6639e2?q=80&w=1200&auto=format&fit=crop" alt="Dentist performing a treatment with assistance">
+            <figcaption>Treated with real care</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1770321119162-05c18fbcfdb9?q=80&w=1200&auto=format&fit=crop" alt="Modern dental chair and treatment equipment">
+            <figcaption>Modern, comfortable studio</figcaption>
+          </figure>
+        </div>
         <div class="rating-summary reveal">
           <div class="rating-big">
             <span class="rating-num">4.9</span>
@@ -1575,6 +1645,16 @@
     </div>
     <section style="padding-top:0;">
       <div class="wrap">
+        <div class="photo-duo reveal">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1770321119305-f191c09c5801?q=80&w=1200&auto=format&fit=crop" alt="Dental treatment equipment with monitor">
+            <figcaption>Our treatment studio</figcaption>
+          </figure>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1643660526741-094639fbe53a?q=80&w=1200&auto=format&fit=crop" alt="Dental chair in a calm, sunlit studio">
+            <figcaption>Bright, calm rooms</figcaption>
+          </figure>
+        </div>
         <div class="booking reveal">
           <div class="booking-info">
             <div class="info-line">
