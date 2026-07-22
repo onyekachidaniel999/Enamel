@@ -1042,9 +1042,151 @@
     display:flex; align-items:center; justify-content:center;
   }
 
-  /* ---------- REVEAL ---------- */
-  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);}
-  .reveal.in{opacity:1; transform:translateY(0);}
+  /* ---------- PHONE CTA STRIP ---------- */
+  .phone-strip{
+    background:var(--teal-deep);
+    border-radius:var(--radius-lg);
+    padding:28px 36px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .phone-strip-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .phone-icon-wrap{
+    width:54px; height:54px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    border:1.5px solid rgba(255,255,255,0.2);
+  }
+  .phone-strip-text b{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    color:#fff;
+    font-weight:560;
+  }
+  .phone-strip-text span{
+    font-size:13px;
+    color:rgba(255,255,255,0.65);
+    margin-top:2px;
+    display:block;
+  }
+  .phone-strip .btn-call{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:13px 28px;
+    border-radius:var(--radius-pill);
+    background:#fff;
+    color:var(--teal-deep);
+    font-weight:700;
+    font-size:15px;
+    border:none;
+    text-decoration:none;
+    transition:transform .25s ease, box-shadow .25s ease;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .phone-strip .btn-call:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 28px -8px rgba(0,0,0,0.35);
+  }
+  @media(max-width:620px){
+    .phone-strip{flex-direction:column; align-items:flex-start; padding:22px 20px; gap:18px;}
+    .phone-strip .btn-call{width:100%; justify-content:center;}
+  }
+
+  /* ---------- HOME CONTACT FORM ---------- */
+  .home-contact{
+    background:var(--paper-deep);
+    border-radius:var(--radius-lg);
+    padding:44px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+    border:1px solid var(--line);
+  }
+  .home-contact-info h3{
+    font-size:clamp(22px,2.6vw,30px);
+    margin-bottom:12px;
+  }
+  .home-contact-info p{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:28px;
+  }
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:16px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .contact-item .ci{
+    width:38px; height:38px;
+    border-radius:10px;
+    background:var(--mint-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--teal);
+    flex-shrink:0;
+  }
+  .contact-item b{display:block; color:var(--ink); font-size:14px;}
+  .contact-item span{font-size:13px;}
+  .home-form-wrap{
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:32px;
+    box-shadow:var(--shadow);
+  }
+  .home-form-wrap h4{
+    font-size:20px;
+    margin-bottom:22px;
+    color:var(--teal-deep);
+  }
+  .home-form-wrap .field input,
+  .home-form-wrap .field select{
+    padding:12px 14px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    font-family:inherit;
+    font-size:14px;
+    background:var(--paper);
+    width:100%;
+    transition:border-color .2s;
+  }
+  .home-form-wrap .field input:focus,
+  .home-form-wrap .field select:focus{
+    border-color:var(--coral);
+    outline:none;
+  }
+  .home-form-wrap .form-row{margin-bottom:14px;}
+  .home-form-wrap .btn{width:100%; margin-top:6px; padding:14px;}
+  @media(max-width:860px){
+    .home-contact{grid-template-columns:1fr; gap:28px; padding:28px 20px;}
+  }
+
+  /* ---------- FOOTER MOBILE 2-COL FIX ---------- */
+  @media(max-width:620px){
+    .footer-grid{
+      grid-template-columns:1fr 1fr !important;
+      gap:24px 16px;
+    }
+    .footer-grid > div:first-child{
+      grid-column:1 / -1;
+    }
+    .footer-grid p{max-width:none;}
+  }
 
   /* ---------- GLOBAL OVERFLOW / CENTERING FIXES ---------- */
   section, footer, header, .trust-bar, .page, .page-header{
@@ -1190,7 +1332,7 @@
     .process-wrap{padding:24px 16px; border-radius:20px;}
     .hero-stats{flex-wrap:wrap; gap:14px; justify-content:center;}
     .form-row{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
     .footer-bottom{flex-direction:column; gap:12px; align-items:center; text-align:center;}
     .services-cta{flex-direction:column; align-items:stretch; text-align:center;}
     .nav-inner{padding:8px 10px 8px 14px;}
@@ -1435,6 +1577,85 @@
         </div>
         <div style="text-align:center;">
           <button data-page="team" class="teaser-cta">Meet the team <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phone CTA Strip -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="phone-strip reveal">
+          <div class="phone-strip-left">
+            <div class="phone-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3A19.5 19.5 0 015 12.7 19.8 19.8 0 012 4.1 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="phone-strip-text">
+              <b>(416) 555-0148</b>
+              <span>Call us Mon–Fri 8am–6pm · Same-day emergency slots available</span>
+            </div>
+          </div>
+          <a href="tel:+14165550148" class="btn-call">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3A19.5 19.5 0 015 12.7 19.8 19.8 0 012 4.1 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Call now
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form on Home -->
+    <section class="content-section tight">
+      <div class="wrap">
+        <div class="home-contact reveal">
+          <div class="home-contact-info">
+            <div class="eyebrow">Get in touch</div>
+            <h3>Book a visit or ask us anything.</h3>
+            <p>Whether you're ready to book or just have a question, drop us a message and we'll get back to you the same day.</p>
+            <div class="contact-item">
+              <div class="ci">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3A19.5 19.5 0 015 12.7 19.8 19.8 0 012 4.1 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0122 16.9z" stroke="currentColor" stroke-width="1.8"/></svg>
+              </div>
+              <div><b>(416) 555-0148</b><span>Mon–Fri 8am–6pm, Sat 9am–3pm</span></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
+              </div>
+              <div><b>hello@enamel.dental</b><span>We reply within a few hours</span></div>
+            </div>
+            <div class="contact-item">
+              <div class="ci">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/></svg>
+              </div>
+              <div><b>240 King St W, Toronto</b><span>Parking available on-site</span></div>
+            </div>
+          </div>
+          <div class="home-form-wrap">
+            <h4>Send us a message</h4>
+            <div class="form-row">
+              <div class="field"><label>First name</label><input type="text" placeholder="Jane"></div>
+              <div class="field"><label>Last name</label><input type="text" placeholder="Smith"></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Phone</label><input type="tel" placeholder="(416) 000-0000"></div>
+              <div class="field"><label>Email</label><input type="email" placeholder="jane@email.com"></div>
+            </div>
+            <div class="form-row">
+              <div class="field full"><label>What can we help with?</label>
+                <select>
+                  <option value="">Select a service…</option>
+                  <option>General checkup</option>
+                  <option>Teeth whitening</option>
+                  <option>Cosmetic dentistry</option>
+                  <option>Orthodontics</option>
+                  <option>Emergency care</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="this.textContent='✓ Message sent! We\'ll be in touch shortly.';this.style.background='var(--teal)';">Send message</button>
+          </div>
         </div>
       </div>
     </section>
