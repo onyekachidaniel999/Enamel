@@ -1660,19 +1660,6 @@
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="content-section tight">
-      <div class="wrap">
-        <div class="services-cta reveal">
-          <div>
-            <h3>Ready to get on the calendar?</h3>
-            <p>Same-day emergency slots available every day.</p>
-          </div>
-          <button data-page="book" class="btn btn-primary">Book a visit</button>
-        </div>
-      </div>
-    </section>
-
   </div>
 
   <!-- ============ SERVICES PAGE ============ -->
@@ -2070,27 +2057,20 @@
             <img src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?q=80&w=800&auto=format&fit=crop" alt="Sterile dental instrument tray" style="border-radius:var(--radius-md); margin-top:8px; width:100%; max-width:340px; box-shadow:var(--shadow);">
           </div>
 
-          <form class="booking-form" onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Request sent ✓';">
+          <div class="home-form-wrap" style="box-shadow:var(--shadow);">
+            <h4>Request an appointment</h4>
             <div class="form-row">
-              <div class="field">
-                <label for="fname">First name</label>
-                <input id="fname" type="text" placeholder="Jane" required>
-              </div>
-              <div class="field">
-                <label for="lname">Last name</label>
-                <input id="lname" type="text" placeholder="Doe" required>
-              </div>
+              <div class="field"><label>First name</label><input type="text" placeholder="Jane" required></div>
+              <div class="field"><label>Last name</label><input type="text" placeholder="Doe" required></div>
             </div>
             <div class="form-row">
-              <div class="field full">
-                <label for="phone">Phone number</label>
-                <input id="phone" type="tel" placeholder="(555) 000-0000" required>
-              </div>
+              <div class="field"><label>Phone</label><input type="tel" placeholder="(416) 000-0000" required></div>
+              <div class="field"><label>Email</label><input type="email" placeholder="jane@email.com"></div>
             </div>
             <div class="form-row">
-              <div class="field">
-                <label for="service">Service</label>
+              <div class="field full"><label>What can we help with?</label>
                 <select id="service">
+                  <option value="">Select a service…</option>
                   <option>General checkup</option>
                   <option>Cosmetic dentistry</option>
                   <option>Teeth whitening</option>
@@ -2099,13 +2079,12 @@
                   <option>Pediatric dentistry</option>
                 </select>
               </div>
-              <div class="field">
-                <label for="date">Preferred date</label>
-                <input id="date" type="date">
-              </div>
             </div>
-            <button type="submit" class="btn btn-primary">Request appointment</button>
-          </form>
+            <div class="form-row">
+              <div class="field full"><label>Preferred date</label><input type="date"></div>
+            </div>
+            <button class="btn btn-primary" onclick="this.textContent='✓ Request sent! We\'ll confirm shortly.';this.style.background='var(--teal)';">Request appointment</button>
+          </div>
         </div>
       </div>
     </section>
