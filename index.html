@@ -2165,12 +2165,10 @@
     });
   });
 
-  // ---------- Page switching (with fade out / fade in) ----------
-  function showPage(name){
+  // ---------- Page switching (with fade out / fade in + browser history) ----------
+  function activatePage(name){
     const target = document.getElementById('page-' + name);
     if (!target) return;
-    const current = document.querySelector('.page.active');
-    if (current === target) return;
 
     function activateTarget(){
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active', 'in'));
@@ -2180,17 +2178,22 @@
         btn.classList.toggle('active', btn.getAttribute('data-page') === name);
       });
 
+      // Sync mobile bottom nav
+      document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-page') === name);
+      });
+
       const backLink = document.getElementById('backLink');
-      backLink.style.display = (name === 'home') ? 'none' : 'inline-flex';
+      if (backLink) backLink.style.display = (name === 'home') ? 'none' : 'inline-flex';
 
       window.scrollTo({top:0, behavior:'auto'});
 
-      // Reveal content immediately within the freshly shown page
       target.querySelectorAll('.reveal, .service-card').forEach(el => el.classList.add('in'));
-
-      // Trigger the fade-in on the next frame so the transition actually runs
       requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('in')));
     }
+
+    const current = document.querySelector('.page.active');
+    if (current === target) return;
 
     if (current){
       current.classList.remove('in');
@@ -2199,6 +2202,31 @@
       activateTarget();
     }
   }
+
+  function showPage(name, pushHistory){
+    // Default: always push to history unless explicitly told not to
+    if (pushHistory !== false){
+      history.pushState({ page: name }, '', '#' + name);
+    }
+    activatePage(name);
+  }
+
+  // Handle phone/browser back & forward buttons
+  window.addEventListener('popstate', (e) => {
+    const page = (e.state && e.state.page) ? e.state.page : 'home';
+    activatePage(page);
+  });
+
+  // Seed initial history entry so the very first back press works
+  history.replaceState({ page: 'home' }, '', '#home');
+
+  // On load, if URL already has a hash (e.g. user bookmarked #services), go there
+  (function(){
+    const hash = window.location.hash.replace('#','');
+    if (hash && document.getElementById('page-' + hash)){
+      activatePage(hash);
+    }
+  })();
 
   document.querySelectorAll('[data-page]').forEach(el => {
     el.addEventListener('click', (e) => {
